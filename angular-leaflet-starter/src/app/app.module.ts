@@ -6,6 +6,8 @@ import { MapComponent } from './map/map.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import { AppService } from "./app.service";
 import {HttpClientModule} from "@angular/common/http";
+import {MatSliderModule} from '@angular/material/slider';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     HttpClientModule,
     LeafletModule,
+    MatSliderModule,
+    BrowserAnimationsModule,
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

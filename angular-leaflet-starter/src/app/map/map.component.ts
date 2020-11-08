@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { icon, latLng, latLngBounds, MapOptions, Marker, rectangle, tileLayer } from 'leaflet';
 import { AppService } from "../app.service";
 
+
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -11,6 +13,7 @@ export class MapComponent implements OnInit {
 
   map: any;
   mapOptions: MapOptions;
+  value: number = 1;
 
   constructor(private _service: AppService) { }
 
@@ -23,22 +26,34 @@ export class MapComponent implements OnInit {
     this.addSampleMarker(46.0569, 14.5058);
   }
 
+  onChange(event) {
+    this.value = event.value;
+
+  }
+
   onMapClick(event) {
+    //console.log(this.value);
+    
+    const moveLat = 0.02 * this.value * this.value;
+    const moveLng = 0.02*1.5 * this.value * this.value;
+
     const coordinateLat = event.latlng.lat;
     const coordinateLng = event.latlng.lng;
-    const corner1 = latLng(coordinateLat, coordinateLng);
-    const corner2 = latLng(coordinateLat + 0.03, coordinateLng + 0.03);
+    const center = latLng(coordinateLat, coordinateLng);
+
+    const corner1 = latLng(coordinateLat - moveLat, coordinateLng - moveLng);
+    const corner2 = latLng(coordinateLat + moveLat, coordinateLng + moveLng);
     const bounds = latLngBounds(corner1, corner2);
     rectangle(bounds, {color: '#800000'}).addTo(this.map);
-    this.map.fitBounds(bounds);
+    //this.map.fitBounds(bounds);
 
-    this.addSampleMarker((coordinateLat + coordinateLat + 0.03)/2, (coordinateLng + coordinateLng + 0.03)/2)
+    this.addSampleMarker(coordinateLat,coordinateLng);
 
     const data = {
-      leftBottomLat: coordinateLat,
-      leftBottomLng: coordinateLng,
-      rightTopLat: coordinateLat + 0.03,
-      rightTopLng: coordinateLng + 0.03
+      leftBottomLat: coordinateLat - moveLat,
+      leftBottomLng: coordinateLng - moveLng,
+      rightTopLat: coordinateLat + moveLat,
+      rightTopLng: coordinateLng + moveLng
     }
     this._service.sendCoordinates(data);
   }

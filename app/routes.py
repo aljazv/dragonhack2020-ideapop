@@ -112,20 +112,21 @@ def add_coordinates():
         config.sh_client_secret = CLIENT_SECRET
 
     betsiboka_coords_wgs84 = [data["leftBottomLng"],data["leftBottomLat"],data["rightTopLng"],data["rightTopLat"]]
+    #betsiboka_coords_wgs84 = [13.430786,45.565987,15.548401,46.464349]
     #filename = #f"hi{str(sum(betsiboka_coords_wgs84))}.png" 
 
     
-    resolution = 100
+    resolution = 10
 
     betsiboka_bbox = BBox(bbox=betsiboka_coords_wgs84, crs=CRS.WGS84)
     betsiboka_size = bbox_to_dimensions(betsiboka_bbox, resolution=resolution)
 
 
-    #max_pixel = 300*300
-    #while betsiboka_size[0]*betsiboka_size[1] > max_pixel:
-    #    resolution += 10
-    #    betsiboka_bbox = BBox(bbox=betsiboka_coords_wgs84, crs=CRS.WGS84)
-    #    betsiboka_size = bbox_to_dimensions(betsiboka_bbox, resolution=resolution)
+    max_pixel = 1000*1000
+    while betsiboka_size[0]*betsiboka_size[1] > max_pixel:
+        resolution += 10
+        betsiboka_bbox = BBox(bbox=betsiboka_coords_wgs84, crs=CRS.WGS84)
+        betsiboka_size = bbox_to_dimensions(betsiboka_bbox, resolution=resolution)
     
     evalscript_dem = '''
     //VERSION=3
