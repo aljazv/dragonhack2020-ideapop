@@ -25,7 +25,6 @@ This part of the application is listening on port 4200 and it is available on th
 
 For our back-end part we used python Flask where we included necessary modules. To start server create new virtual env and install packages from requirements
 ```
-cd app/
 pip install -r requirements.txt
 
 export FLASK_APP=app.py
