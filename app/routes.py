@@ -92,12 +92,9 @@ def get_rays(center_point, data):
 def ping():
     return "pong"
 
-@app.route('/coordinates', methods=['POST', 'GET'])
+@app.route('/coordinates', methods=['POST'])
 def add_coordinates():
-    filename = "zan.png"
-    if request.method == "GET":
-        return send_from_directory(app.config["CLIENT_IMAGES"], filename=filename, as_attachment=True)
-
+    filename="picture.png"
     data = request.json
     #print(data)
     """
@@ -246,7 +243,7 @@ def add_coordinates():
     #plt.show()
     #seeable_points(z)
     plt.savefig(filename)
-    return send_from_directory(app.config["CLIENT_IMAGES"], filename=filename, as_attachment=True)
+    return send_file("../"+filename, as_attachment=True)
 
 @app.route('/fajl', methods=['POST', 'GET'])
 def sen_fajl():
