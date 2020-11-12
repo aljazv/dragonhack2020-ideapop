@@ -23,18 +23,15 @@ app.config["CLIENT_IMAGES"] = "/home/aljaz/dragonhack2020-ideapop/"
 
 
 
-@app.route('/', methods=['GET'])
+@app.route('/ping', methods=['GET'])
 def ping():
     return "pong"
 
-@app.route('/coordinates', methods=['POST', 'GET'])
+@app.route('/coordinates', methods=['POST'])
 def add_coordinates():
-    filename = "zan.png"
-    if request.method == "GET":
-        return send_from_directory(app.config["CLIENT_IMAGES"], filename=filename, as_attachment=True)
-
-    data_json = request.json
-    #print(data_json)
+    filename="picture.png"
+    data = request.json
+    #print(data)
     """
     leftBottomLat: 46.09728117681059
     leftBottomLng: 14.524612426757812
@@ -124,11 +121,23 @@ def add_coordinates():
     #plt.show()
     #seeable_points(z)
     plt.savefig(filename)
-    return send_from_directory(app.config["CLIENT_IMAGES"], filename=filename, as_attachment=True)
+    return send_file("../"+filename, as_attachment=True)
 
 @app.route('/fajl', methods=['POST', 'GET'])
 def sen_fajl():
 
     filename = "fig.png"
 
-    return send_file(filename)
+    return send_file(filename, as_attachment=True)
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    static_path = app.static_folder + "/../../angular-leaflet-starter/dist/angular-leaflet-starter"
+    print(os.path.exists(static_path + '/' + path))
+    if path != "" and os.path.exists(static_path + '/' + path):
+        return send_from_directory(static_path, path)
+    else:
+        print(app.static_folder)
+        return send_from_directory(static_path, 'index.html')

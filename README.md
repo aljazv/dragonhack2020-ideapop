@@ -32,4 +32,8 @@ python -m flask run
 
 ```
 
-This part of the application is listening on port 4200 and it is available on the link: http://localhost:5000/.
+This part of the application is listening on port 4200 and it is available on the link: http://localhost:5000/.,
+
+
+
+Demo available here: https://visible-area.herokuapp.com/
