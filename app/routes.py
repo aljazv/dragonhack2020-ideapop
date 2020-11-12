@@ -13,7 +13,7 @@ from bresenham import bresenham
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import OrderedDict
-from flask import send_from_directory
+from flask import send_from_directory, send_file
 from flask import request
 
 app.config["CLIENT_IMAGES"] = "/home/aljaz/dragonhack2020-ideapop/"
@@ -248,3 +248,9 @@ def add_coordinates():
     plt.savefig(filename)
     return send_from_directory(app.config["CLIENT_IMAGES"], filename=filename, as_attachment=True)
 
+@app.route('/fajl', methods=['POST', 'GET'])
+def sen_fajl():
+
+    filename = "fig.png"
+
+    return send_file(filename)
