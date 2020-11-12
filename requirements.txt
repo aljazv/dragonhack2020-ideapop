@@ -76,7 +76,6 @@ six==1.15.0
 terminado==0.9.1
 testpath==0.4.4
 tifffile==2020.10.1
-toml @ file:///tmp/build/80754af9/toml_1592853716807/work
 tornado==6.1
 traitlets==5.0.5
 urllib3==1.25.11
