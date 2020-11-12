@@ -88,7 +88,7 @@ def get_rays(center_point, data):
     plt.show()'''
     return rays
 
-@app.route('/', methods=['GET'])
+@app.route('/ping', methods=['GET'])
 def ping():
     return "pong"
 
@@ -253,4 +253,16 @@ def sen_fajl():
 
     filename = "fig.png"
 
-    return send_file(filename)
+    return send_file(filename, as_attachment=True)
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    static_path = app.static_folder + "/../../angular-leaflet-starter/dist/angular-leaflet-starter"
+    print(os.path.exists(static_path + '/' + path))
+    if path != "" and os.path.exists(static_path + '/' + path):
+        return send_from_directory(static_path, path)
+    else:
+        print(app.static_folder)
+        return send_from_directory(static_path, 'index.html')
