@@ -56,7 +56,6 @@ prompt-toolkit==3.0.8
 ptyprocess==0.6.0
 pycparser==2.20
 Pygments==2.7.2
-pylint @ file:///tmp/build/80754af9/pylint_1598623985952/work
 pyparsing==2.4.7
 pyproj==3.0.0.post1
 pyrsistent==0.17.3
