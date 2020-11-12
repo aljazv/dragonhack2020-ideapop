@@ -88,6 +88,10 @@ def get_rays(center_point, data):
     plt.show()'''
     return rays
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return "pong"
+
 @app.route('/coordinates', methods=['POST', 'GET'])
 def add_coordinates():
     filename = "zan.png"
@@ -95,7 +99,7 @@ def add_coordinates():
         return send_from_directory(app.config["CLIENT_IMAGES"], filename=filename, as_attachment=True)
 
     data = request.json
-    print(data)
+    #print(data)
     """
     leftBottomLat: 46.09728117681059
     leftBottomLng: 14.524612426757812

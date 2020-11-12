@@ -74,7 +74,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-leaflet-starter:build"
+            "browserTarget": "angular-leaflet-starter:build",
+            "disableHostCheck": true
           },
           "configurations": {
             "production": {
