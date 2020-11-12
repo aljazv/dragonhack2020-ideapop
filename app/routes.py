@@ -88,7 +88,7 @@ def get_rays(center_point, data):
     plt.show()'''
     return rays
 
-@app.route('/ping', methods=['GET'])
+@app.route('/', methods=['GET'])
 def ping():
     return "pong"
 
